@@ -26,5 +26,10 @@
   "bugs": {
     "url": "https://github.com/boyserk84/nateserk_restybread/issues"
   },
-  "homepage": "https://github.com/boyserk84/nateserk_restybread#readme"
+  "homepage": "https://github.com/boyserk84/nateserk_restybread#readme",
+  "dependencies": {
+    "aguid": "^2.0.0",
+    "hapi": "^16.1.1",
+    "moment": "^2.18.1"
+  }
 }
