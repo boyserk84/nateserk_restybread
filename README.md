@@ -1,15 +1,27 @@
 # Nateserk RestyBread
-Boilerplate for quickly build C.R.U.D Rest(ful) API with Node.js and Hapi.js.
 
 [![Dependency status](https://david-dm.org/boyserk84/nateserk_restybread.svg)](https://david-dm.org/boyserk84/nateserk_restybread)
 
+# Description
+Boilerplate for quickly build C.R.U.D Rest(ful) API with Node.js and Hapi.js.
+
+## Requirements
+* Node.js
+* NPM
+
+# List of Rest API Endpoint Ready Out of the box
+```
+POST    http://localhost:8000/content/
+GET     http://localhost:8000/content/{id}
+PUT     http://localhost:8000/content/{id}
+DELETE  http://localhost:8000/content/{id}
+```
+
 # Update/Changelog
 * 05/15/2017
+** CRUD endpoint for the given id of data.
 
 # How to Guide
-
-## First-timer Instruction
-
 ### Step 1: Installation
 After cloning the repository and change your directory to where this project's root is located,
 run the following command to install all project dependencies:
