@@ -2,6 +2,10 @@
 Boilerplate for quickly build C.R.U.D Rest(ful) API with Node.js and Hapi.js.
 
 [![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
+[codeship-image]:https://codeship.com/projects/79da7240-5481-0132-ea32-42ab35009c21/status
+[codeship-url]:https://codeship.com/projects/49203
+[david-dm-url]:https://david-dm.org/boyserk84/nateserk_restybread
+[david-dm-image]:https://david-dm.org/boyserk84/nateserk_restybread.svg
 
 # Update/Changelog
 * 05/15/2017
