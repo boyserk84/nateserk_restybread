@@ -1,6 +1,7 @@
 # Nateserk RestyBread
 Boilerplate for quickly build C.R.U.D Rest(ful) API with Node.js and Hapi.js.
 
+[![Dependency status][david-dm-image]][david-dm-url] [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
 
 # Update/Changelog
 * 05/15/2017
