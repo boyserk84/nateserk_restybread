@@ -1,0 +1,30 @@
+{
+  "name": "nateserk_restybread",
+  "version": "1.0.0",
+  "description": "Boilerplate for quickly build C.R.U.D Rest(ful) API with Node.js and Hapi.js.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boyserk84/nateserk_restybread.git"
+  },
+  "keywords": [
+    "restful",
+    "api",
+    "node.js",
+    "node",
+    "hapi",
+    "boilierplate",
+    "crud",
+    "curl",
+    "backend"
+  ],
+  "author": "Nate K.",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/boyserk84/nateserk_restybread/issues"
+  },
+  "homepage": "https://github.com/boyserk84/nateserk_restybread#readme"
+}
