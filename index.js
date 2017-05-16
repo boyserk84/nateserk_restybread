@@ -13,6 +13,8 @@ const Hapi = require('hapi');
 const Good = require('good');
 const Constants = require('./src/config/constants.js');
 
+/** Load Content Route */
+const ContentRoute = require('./src/routes/content.js');
 
 
 // Check initialization and its dependencies
@@ -47,6 +49,9 @@ var plugins = [
                 ]
             }
         }
+    },
+    {
+        register: ContentRoute
     }
 ];
 
