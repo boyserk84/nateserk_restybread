@@ -6,38 +6,26 @@
 */
 'use strict';
 
-function BaseModel() {
-  this.id = ''; // ID for look up from DB
-  this.created_at = ''; // Unix timestamp
-  this.updated_at = ''; // Unix timestamp
-};
+class BaseModel {
+  constructor() {
+    this.id = ''; // ID for look up from DB
+    this.created_at = ''; // Unix timestamp
+    this.updated_at = ''; // Unix timestamp
+  }
 
-/**
-* Helper method to get all contents
-*/
-BaseModel.prototype.get = function() {
-};
+  ToJSON() {
+    return JSON.stringify(this);
+  }
 
-/**
-* Serialize this object.
-*/
-BaseModel.prototype.ToJSON = function() {
-  return JSON.stringify(this);
-};
+  FromJSON(jsonStr) {
+    var obj = JSON.parse(jsonStr);
 
-/**
-* Deserialize to this object.
-* @param json     JSON string
-*/
-BaseModel.prototype.FromJSON = function(jsonStr) {
-  var obj = JSON.parse(jsonStr);
-
-  for (var prop in obj) {
-    if ( this.hasOwnProperty(prop) ) {
-      this[prop] = obj[prop];
-    }//if
-  }//for
-};
-
+    for (var prop in obj) {
+      if ( this.hasOwnProperty(prop) ) {
+        this[prop] = obj[prop];
+      }//if
+    }//for
+  }
+}
 
 module.exports = BaseModel;
