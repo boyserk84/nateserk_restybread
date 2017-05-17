@@ -50,7 +50,6 @@ exports.register = function(server, options, next) {
                   validate: {
                       params: {
                         id: Joi.string().required()
-                          //id: Joi.string().regex(/[a-zA-Z0-9]{16}/)
                       }
                   }
               }
@@ -86,7 +85,7 @@ exports.register = function(server, options, next) {
                   handler: manager.Delete,
                   validate: {
                       params: {
-                          id: Joi.string().regex(/[a-zA-Z0-9]{16}/)
+                          id: Joi.string().required()
                       }
                   }
               }
