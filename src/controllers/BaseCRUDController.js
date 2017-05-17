@@ -10,24 +10,35 @@
 //var Boom = require('boom');
 
 class BaseCRUDController {
+
+  /**
+  * List of Stub methods that need to implement in the child controller.
+  */
+
+  _GetById(id) { throw("unimplemented in the child controller."); }
+  _Create(params) { throw("unimplemented in the child controller."); }
+  _Update(id, params) { throw("unimplemented in the child controller."); }
+  _Delete(id) { throw("unimplemented in the child controller."); }
+  _GetMultiple(params) { throw("unimplemented in the child controller."); }
+
   Get(request, reply) {
-      throw("unimplemented in child controller.");
+      reply( this._GetById(request.params.id) );
   }
 
   GetMultiple(request, reply) {
-      throw("unimplemented in child controller.");
+      reply( this._GetMultiple(request.params) );
   }
 
   Create(request, reply) {
-      throw("unimplemented in child controller.");
+      reply( this._Create(request.params) );
   }
 
   Update(request, reply) {
-      throw("unimplemented in child controller.");
+      reply( this._Update(request.params.id, request.params) );
   }
 
   Delete(request, reply) {
-      throw("unimplemented in child controller.");
+      reply( this._Delete(request.params.id) );
   }
 }
 

@@ -15,12 +15,13 @@ class ContentController extends BaseCRUDController{
       super();
     }
 
-    Get(request, reply) {
+    _GetById(id) {
       // Example, feel free to comment out and re-implement
       var model = new ContentModel();
       model.FromJSON("{ \"created_at\": 1234567 }");
-      model.id = request.params.id;
-      reply(model);
+      model.id = id;
+
+      return model;
     }
 }
 
