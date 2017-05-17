@@ -18,8 +18,8 @@ DELETE  http://localhost:8000/content/{id}
 ```
 
 # Update/Changelog
-* 05/15/2017
-** CRUD endpoint for the given id of data.
+* 05/15/2017 Version 1.0.0
+* CRUD endpoint for the given id of data.
 
 # How to Guide
 ### Step 1: Installation
@@ -63,4 +63,5 @@ src/
   |-BaseModel.js            BaseModel object for serialize and deserialize JSON data.
 |-routes/                   Routes folder
   |-content.js              API route endpoint for 'content'
+|-middlewares/              Middleware folder (Auth, database, bridge)
 ```
