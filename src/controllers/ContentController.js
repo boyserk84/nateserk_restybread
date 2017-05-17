@@ -21,7 +21,24 @@ class ContentController extends BaseCRUDController{
       model.FromJSON("{ \"created_at\": 1234567 }");
       model.id = id;
 
+      // TODO: integrate with BOOM
+      return { data: model };
+    }
+
+    _Create(params) {
+      var model = new ContentModel();
+      // TODO: Implement this
       return model;
+    }
+
+    _Delete(id) {
+      // TODO: Implement this
+      return { code: 200 };
+    }
+
+    _Update(id, params) {
+      // TODO: Implement this
+      return { code: 200 };
     }
 }
 
