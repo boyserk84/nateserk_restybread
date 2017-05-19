@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/boyserk84/nateserk_restybread#readme",
   "dependencies": {
+    "@google-cloud/datastore": "^1.0.2",
     "aguid": "^2.0.0",
     "dotenv": "^4.0.0",
     "good": "^7.1.0",
