@@ -59,9 +59,10 @@ src/
   |-.env                    Environment and configuration for the entire application.
 |-controllers/              Controllers/Manager folder
   |-ContentController.js    ContentController for handling request/reply for its corresponding route.
-|-models/                   Models folder
+|-models/                   Models folder (mapping DAO to model object)
   |-BaseModel.js            BaseModel object for serialize and deserialize JSON data.
 |-routes/                   Routes folder
   |-content.js              API route endpoint for 'content'
 |-middlewares/              Middleware folder (Auth, database, bridge)
+|-dao/                      Direct Access Object folder (all objects interact with DB.)
 ```
