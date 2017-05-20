@@ -6,7 +6,7 @@
 Boilerplate for quickly build C.R.U.D Rest(ful) API with Node.js and Hapi.js.
 
 ## Requirements
-* Node.js
+* Node.js (version 6 or above)
 * NPM
 
 # List of Rest API Endpoint Ready Out of the box
@@ -20,6 +20,7 @@ DELETE  http://localhost:8000/content/{id}
 # Update/Changelog
 * 05/15/2017 Version 1.0.0
 * CRUD endpoint for the given id of data.
+* Support 'Google DataStore'
 
 # How to Guide
 ### Step 1: Installation
@@ -64,5 +65,8 @@ src/
 |-routes/                   Routes folder
   |-content.js              API route endpoint for 'content'
 |-middlewares/              Middleware folder (Auth, database, bridge)
+  |-googledatastore.js      Adapter for connecting to Google DataStore
 |-dao/                      Direct Access Object folder (all objects interact with DB.)
+  |-basedao.js              Base DAO for common functionality
+  |-contentdao.js           ContentDAO extends from BaseDAO
 ```
