@@ -5,7 +5,7 @@
 * @author Nate K.
 */
 'use strict';
-const BaseModel = require('./BaseModel');
+const BaseModel = require('./baseModel');
 
 class ContentModel extends BaseModel {
 

@@ -15,6 +15,9 @@ class BaseCRUDController {
   * List of Stub methods that need to implement in the child controller.
   */
 
+  // TODO: Delete probably don't need internal stub method in the child class.
+
+
   _GetById(id) { throw("unimplemented in the child controller."); }
   _Create(params) { throw("unimplemented in the child controller."); }
   _Update(id, params) { throw("unimplemented in the child controller."); }
@@ -22,7 +25,7 @@ class BaseCRUDController {
   _GetMultiple(params) { throw("unimplemented in the child controller."); }
 
   Get(request, reply) {
-      reply( this._GetById(request.params.id) );
+      this._GetById(request.params.id, function(response) { reply(response); } );
   }
 
   GetMultiple(request, reply) {
@@ -30,7 +33,7 @@ class BaseCRUDController {
   }
 
   Create(request, reply) {
-      reply( this._Create(request.params) );
+      this._Create(request.params, function(response) { reply(response); } );
   }
 
   Update(request, reply) {

@@ -7,33 +7,70 @@
 'use strict';
 
 //var Boom = require('boom');
-const BaseCRUDController = require('./BaseCRUDController');
-const ContentModel = require('../models/ContentModel');
+const BaseCRUDController = require('./basecrudcontroller');
+const ContentModel = require('../models/contentmodel');
+const ContentDAO = require('../dao/content');
+const GoogleDataStore = require('../middlewares/googledatastore');
+const aguid = require('aguid');
+
 
 class ContentController extends BaseCRUDController{
     constructor() {
       super();
+      this._gStore = new GoogleDataStore(
+        process.env.GCLOUD_DATASTORE_KEY_PATH,
+        process.env.GCLOUD_DATASTORE_PROJECT_ID,
+        "recordkeeper"
+      );
     }
 
-    _GetById(id) {
-      // Example, feel free to comment out and re-implement
-      var model = new ContentModel();
-      model.FromJSON("{ \"created_at\": 1234567 }");
-      model.id = id;
-
+    _GetById(id, callback) {
       // TODO: integrate with BOOM
-      return { data: model };
+      console.log("Trying to retrieve Id=" + id);
+
+      let model = new ContentModel();
+      let dao = new ContentDAO( model, this._gStore);
+
+      model.id = id;
+      dao.Get(
+        function(result) {
+          if ( result ) {
+            callback( { data: result } );
+          } else {
+            callback( { data: [] });
+          }
+        }
+      );
+
     }
 
-    _Create(params) {
-      var model = new ContentModel();
-      // TODO: Implement this
-      return model;
+    _Create(params, callback) {
+      let model = new ContentModel();
+      let dao = new ContentDAO(model, this._gStore);
+
+      // TODO: Integrate params
+      model.id = aguid( Date.now() );
+      model.title = Date.now();
+
+      dao.Create(
+        function(result) {
+          console.log(result);
+          let codeStatus = 500;
+          if ( result ) {
+            codeStatus = 202;
+          }
+
+          if ( callback ) {
+            callback( { code: codeStatus });
+          }
+        }
+      );
+
     }
 
     _Delete(id) {
       // TODO: Implement this
-      return { code: 200 };
+      return { code: 204 };
     }
 
     _Update(id, params) {
