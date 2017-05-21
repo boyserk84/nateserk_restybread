@@ -13,6 +13,8 @@ const Hapi = require('hapi');
 const Good = require('good');
 const Constants = require('./src/config/constants.js');
 
+const GoogleDataStore = require('./src/middlewares/googledatastore');
+
 /** Load Content Route */
 const ContentRoute = require('./src/routes/content.js');
 
@@ -51,7 +53,14 @@ var plugins = [
         }
     },
     {
-        register: ContentRoute
+        register: ContentRoute,
+        options: {
+            adapter: new GoogleDataStore(
+              process.env.GCLOUD_DATASTORE_KEY_PATH,
+              process.env.GCLOUD_DATASTORE_PROJECT_ID,
+              Constants.GOOGLE_DATASTORE_KIND_CONTENT
+            )
+        }
     }
 ];
 

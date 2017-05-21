@@ -15,13 +15,9 @@ const aguid = require('aguid');
 
 
 class ContentController extends BaseCRUDController{
-    constructor() {
+    constructor(dbAdapter) {
       super();
-      this._gStore = new GoogleDataStore(
-        process.env.GCLOUD_DATASTORE_KEY_PATH,
-        process.env.GCLOUD_DATASTORE_PROJECT_ID,
-        "recordkeeper"
-      );
+      this._dbAdapter = dbAdapter;
     }
 
     _GetById(id, callback) {
@@ -29,7 +25,7 @@ class ContentController extends BaseCRUDController{
       console.log("Trying to retrieve Id=" + id);
 
       let model = new ContentModel();
-      let dao = new ContentDAO( model, this._gStore);
+      let dao = new ContentDAO( model, this._dbAdapter);
 
       model.id = id;
       dao.Get(
@@ -46,7 +42,7 @@ class ContentController extends BaseCRUDController{
 
     _Create(params, callback) {
       let model = new ContentModel();
-      let dao = new ContentDAO(model, this._gStore);
+      let dao = new ContentDAO(model, this._dbAdapter);
 
       // TODO: Integrate params
       model.id = aguid( Date.now() );

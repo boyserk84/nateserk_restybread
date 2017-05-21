@@ -22,14 +22,14 @@ class BaseCRUDController {
   _Create(params) { throw("unimplemented in the child controller."); }
   _Update(id, params) { throw("unimplemented in the child controller."); }
   _Delete(id) { throw("unimplemented in the child controller."); }
-  _GetMultiple(params) { throw("unimplemented in the child controller."); }
+  _Query(params) { throw("unimplemented in the child controller."); }
 
   Get(request, reply) {
       this._GetById(request.params.id, function(response) { reply(response); } );
   }
 
-  GetMultiple(request, reply) {
-      reply( this._GetMultiple(request.params) );
+  Query(request, reply) {
+      reply( this._Query(request.params) );
   }
 
   Create(request, reply) {
@@ -41,7 +41,7 @@ class BaseCRUDController {
   }
 
   Delete(request, reply) {
-      reply( this._Delete(request.params.id) );
+      this._Delete(request.params.id, function(response) { reply(response); } );
   }
 }
 

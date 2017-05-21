@@ -25,7 +25,8 @@ class BaseDAO {
     }
 
     Delete(callback) {
-
+      // TODO: Check if atomic ensure or CAS is needed.
+      this.database.Delete( this.model.id, callback );
     }
 
     Update(callback) {

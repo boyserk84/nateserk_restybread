@@ -7,7 +7,7 @@
 'use strict';
 
 var Joi = require('joi');
-const ContentController = require('../controllers/ContentController.js');
+const ContentController = require('../controllers/contentcontroller.js');
 
 exports.register = function(server, options, next) {
 
@@ -18,15 +18,20 @@ exports.register = function(server, options, next) {
         //throw ("[ExceptionError] 'config' object is null!");
     //}
 
-    // Setup the controller or manager
-    var manager = new ContentController();
+    if ( !options.adapter )
+    {
+      throw("Database adapter is missing or undefined!");
+    }
 
-    if (manager)
+    // Setup the controller or manager
+    var controller = new ContentController(options.adapter);
+
+    if (controller)
     {
       // Binds all methods
       // similar to doing `contentsController.index.bind(contentsController);`
       // when declaring handlers
-      server.bind(manager);
+      server.bind(controller);
 
       // Declare routes
       // API End points for Contents
@@ -34,7 +39,7 @@ exports.register = function(server, options, next) {
           {
               method: 'GET', path: '/content',
               config: {
-                  handler: manager.GetMultiple,
+                  handler: controller.Query,
                   validate: {
                       query: Joi.object().keys({
                           start: Joi.number().min(0),
@@ -46,7 +51,7 @@ exports.register = function(server, options, next) {
           {
               method: 'GET', path: '/content/{id}',
               config: {
-                  handler: manager.Get,
+                  handler: controller.Get,
                   validate: {
                       params: {
                         id: Joi.string().required()
@@ -57,18 +62,18 @@ exports.register = function(server, options, next) {
           {
               method: 'POST', path: '/content',
               config: {
-                  handler: manager.Create,
-                  validate: {
-                      payload: Joi.object().length(1).keys({
-                          task: Joi.string().required().min(1).max(60)
-                      })
-                  }
+                  handler: controller.Create,
+                  // validate: {
+                  //     payload: Joi.object().length(1).keys({
+                  //         task: Joi.string().required().min(1).max(60)
+                  //     })
+                  // }
               }
           },
           {
               method: 'PUT', path: '/content/{id}',
               config: {
-                  handler: manager.Update,
+                  handler: controller.Update,
                   validate: {
                       params: {
                           id: Joi.string().regex(/[a-zA-Z0-9]{16}/)
@@ -82,7 +87,7 @@ exports.register = function(server, options, next) {
           {
               method: 'DELETE', path: '/content/{id}',
               config: {
-                  handler: manager.Delete,
+                  handler: controller.Delete,
                   validate: {
                       params: {
                           id: Joi.string().required()
@@ -94,7 +99,7 @@ exports.register = function(server, options, next) {
       next();
 
     } else {
-      throw ("[ExceptionError] manager in routes/content.js is undefined or null!");
+      throw ("[ExceptionError] controller in routes/content.js is undefined or null!");
     }
 }
 
