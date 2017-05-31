@@ -17,6 +17,11 @@ class ContentModel extends BaseModel {
     this.locations = [];  // Array of publication locations
     this.records = [];  // Array of records associated with content
   }
+
+  GetType() {
+    return "ContentModel";
+  }
+  
 }
 
 module.exports = ContentModel;

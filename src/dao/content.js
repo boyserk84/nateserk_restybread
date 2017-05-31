@@ -13,7 +13,12 @@ class ContentDAO extends BaseDAO {
 
     constructor(model, dbAdapter) {
         // TODO: Check if model is from the certain class.
-        super(model, dbAdapter);
+        if (model && model.GetType() === "ContentModel") {
+          super(model, dbAdapter);
+        } else {
+          console.log("Exception model is undefined in ContentDAO.");
+          throw("Exception: 'model' is undefined or has incorrect classType.");
+        }
     }
 }
 

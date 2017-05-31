@@ -15,6 +15,11 @@ class BaseModel {
     this.cas = ''; // CAS value
   }
 
+  /** The given type of the model (i.e. className). */
+  GetType() {
+    throw("Child Class must implement 'GetType' method.");
+  }
+
   /** Serialize this object to JSON string. */
   ToJSON() {
     return JSON.stringify(this);

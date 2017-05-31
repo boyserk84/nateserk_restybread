@@ -10,6 +10,12 @@ const DataStore = require('@google-cloud/datastore');
 
 class GoogleDataStore {
 
+  /**
+  * Default Constructor
+  * @param projId         Google Project Id
+  * @param pathToKey      Path to a fileName containing auth credential key
+  * @param kind           Kind (aka namespace or name of the table)
+  */
   constructor(projId, pathToKey, kind) {
       this._dataStore = new DataStore(
         {
