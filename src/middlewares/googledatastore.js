@@ -27,6 +27,23 @@ class GoogleDataStore {
       this._kind = kind;
   }
 
+  Query(query, callback) {
+    // this._dataStore.runQuery(query,
+    //     function(err, result)
+    //     {
+    //         if ( err ) {
+    //           // TODO: Log Error
+    //           console.log(err);
+    //           result = [];
+    //         }
+    //
+    //         if ( callback && typeof(callback) === 'function') {
+    //           callback(result);
+    //         }
+    //     }
+    // );
+  }
+
   /**
   * Retrieve data of the given Id from the given kind.
   * @param id         Identifier
@@ -40,6 +57,8 @@ class GoogleDataStore {
               if ( err ) {
                   // TODO: Log this
                   console.log( err );
+                  callback( false );
+                  return;
               }
 
               if ( callback && typeof(callback) === 'function' ) {
@@ -47,20 +66,6 @@ class GoogleDataStore {
               }
           }
       );
-      // this._dataStore.runQuery(query,
-      //     function(err, result)
-      //     {
-      //         if ( err ) {
-      //           // TODO: Log Error
-      //           console.log(err);
-      //           result = [];
-      //         }
-      //
-      //         if ( callback && typeof(callback) === 'function') {
-      //           callback(result);
-      //         }
-      //     }
-      // );
   }
 
   /**
@@ -71,8 +76,13 @@ class GoogleDataStore {
   */
   Create( id, dataObj, callback) {
     const dataStoreKey = this._dataStore.key([this._kind, id]);
-    this._dataStore.save( { key: dataStoreKey, data:dataObj },
+    // Insert - Id must be unique.
+    this._dataStore.insert( { key: dataStoreKey, data:dataObj },
       function(err) {
+          if ( err ) {
+            // TODO: Log error
+            console.log(err);
+          }
           if ( callback ) {
             callback( (err)?false:true );
           }
@@ -80,11 +90,39 @@ class GoogleDataStore {
     );
   }
 
-  Save(key, data, callback) {
+  /**
+  * Delete data/row of the given Id
+  * @param id
+  * @param callback
+  */
+  Delete(id, callback) {
+    const dataStoreKey = this._dataStore.key([this._kind, id]);
+    this._dataStore.delete( dataStoreKey,
+      function(err) {
+          if ( err ) {
+            // TODO: Log error
+            console.log(err);
+          }
+          if ( callback ) {
+            callback( (err)?false:true );
+          }
+      }
+    );
   }
 
-  Delete(key, id, callback) {
-
+  Update(id, data, callback) {
+    const dataStoreKey = this._dataStore.key([this._kind, id]);
+    this._dataStore.save( { key: dataStoreKey, data:dataObj },
+      function(err) {
+          if ( err ) {
+            // TODO: Log error
+            console.log(err);
+          }
+          if ( callback ) {
+            callback( (err)?false:true );
+          }
+      }
+    );
   }
 
 
