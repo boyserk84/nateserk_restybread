@@ -50,7 +50,27 @@ class BaseDAO {
     Update(callback) {
       // TODO: Test this
       this.model.updated_at = Moment().unix();
-      this.database.Update( this.model.id, this.model, callback );
+      let newCAS = this.model.GenerateCAS();
+      let data = this.model;
+      let id = this.model.id;
+      let cas = this.model.cas;
+
+      // First fetch CAS data
+      this.Get( function(result) {
+        if ( result ) {
+            // If CAS data matches then we allow UPDATE operation.
+            if ( result.cas === cas ) {
+              data.cas = newCAS;  // Regenerate a new CAS
+              this.database.Update( id, data, callback );
+              return;
+            }
+
+            // Otherwise, we return false.
+            callback(false);
+        }
+      } );
+
+
     }
 
     Get(callback) {
