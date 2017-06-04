@@ -18,10 +18,10 @@ class BaseCRUDController {
   // TODO: Delete probably don't need internal stub method in the child class.
 
 
-  _GetById(id) { throw("unimplemented in the child controller."); }
-  _Create(params) { throw("unimplemented in the child controller."); }
-  _Update(id, params) { throw("unimplemented in the child controller."); }
-  _Delete(id) { throw("unimplemented in the child controller."); }
+  _GetById(id, callback) { throw("unimplemented in the child controller."); }
+  _Create(params, callback) { throw("unimplemented in the child controller."); }
+  _Update(id, params, callback) { throw("unimplemented in the child controller."); }
+  _Delete(id, cas, callback) { throw("unimplemented in the child controller."); }
   _Query(params) { throw("unimplemented in the child controller."); }
 
   Get(request, reply) {
@@ -33,7 +33,7 @@ class BaseCRUDController {
   }
 
   Create(request, reply) {
-      this._Create(request.params, function(response) { reply(response); } );
+      this._Create(request.payload, function(response) { reply(response); } );
   }
 
   Update(request, reply) {
@@ -41,7 +41,7 @@ class BaseCRUDController {
   }
 
   Delete(request, reply) {
-      this._Delete(request.params.id, function(response) { reply(response); } );
+      this._Delete(request.params.id, request.payload.cas, function(response) { reply(response); } );
   }
 }
 

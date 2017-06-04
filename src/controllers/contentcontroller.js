@@ -11,7 +11,6 @@ const BaseCRUDController = require('./basecrudcontroller');
 const ContentModel = require('../models/contentmodel');
 const ContentDAO = require('../dao/content');
 const GoogleDataStore = require('../middlewares/googledatastore');
-const aguid = require('aguid');
 
 
 class ContentController extends BaseCRUDController{
@@ -42,18 +41,15 @@ class ContentController extends BaseCRUDController{
 
     _Create(params, callback) {
       let model = new ContentModel();
+      model.FromObject(params);
       let dao = new ContentDAO(model, this._dbAdapter);
-
-      // TODO: Integrate params
-      model.id = aguid( Date.now() );
-      model.title = Date.now();
 
       dao.Create(
         function(result) {
           console.log(result);
           let codeStatus = 500;
           if ( result ) {
-            codeStatus = 202;
+            codeStatus = 201;
           }
 
           if ( callback ) {
@@ -64,13 +60,42 @@ class ContentController extends BaseCRUDController{
 
     }
 
-    _Delete(id) {
-      // TODO: Implement this
+    _Delete(id, cas, callback) {
+      let model = new ContentModel();
+      model.id = id;
+      model.cas = cas;
+      let dao = new ContentDAO(model, this._dbAdapter);
+
+      dao.Delete(
+        function (result) {
+          console.log(result);
+          let codeStatus = 500;
+          if ( result ) {
+            codeStatus = 202;
+          }
+
+          if ( callback ) {
+            callback( { code: codeStatus });
+          }
+
+        }
+      );
       return { code: 204 };
     }
 
     _Update(id, params) {
       // TODO: Implement this
+      let model = new ContentModel();
+      console.log(params);
+      model.FromJSON( params );
+
+      // TODO: Test if other fields being override or partial update allowed
+      //let dao = new ContentDAO(model, this._dbAdapter);
+
+      model.updated_at = Date.now();
+
+      console.log("Model=" + model);
+
       return { code: 200 };
     }
 }
