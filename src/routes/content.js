@@ -63,11 +63,13 @@ exports.register = function(server, options, next) {
               method: 'POST', path: '/content',
               config: {
                   handler: controller.Create,
-                  // validate: {
-                  //     payload: Joi.object().length(1).keys({
-                  //         task: Joi.string().required().min(1).max(60)
-                  //     })
-                  // }
+                   validate: {
+                      // TODO: Test this validation
+                       payload: {
+                           title: Joi.string().required().min(1),
+                           desc: Joi.string()
+                       }
+                   }
               }
           },
           {
@@ -78,9 +80,8 @@ exports.register = function(server, options, next) {
                       params: {
                           id: Joi.string().regex(/[a-zA-Z0-9]{16}/)
                       },
-                      payload: Joi.object().length(1).keys({
-                          task: Joi.string().required().min(1).max(60)
-                      })
+                      // TODO: test this validation
+                      payload: Joi.object().required()
                   }
               }
           },
@@ -91,6 +92,9 @@ exports.register = function(server, options, next) {
                   validate: {
                       params: {
                           id: Joi.string().required()
+                      },
+                      payload: {
+                          cas: Joi.string().required()
                       }
                   }
               }
