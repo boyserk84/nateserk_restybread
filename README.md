@@ -74,10 +74,11 @@ src/
 # Application Flow
 At the high level, the application can be described as the following diagram:
 ```
-Routes => Controllers => Models => DAO => Middleware
+Route => Controller => Model => DAO => Middleware
 ```
 
-* `Routes` is responsible for validation and routing to an appropriate controller.
-* `Controllers` is responsible for gathering all user inputs, construct a strongly type data (model) from it and pass to DAO.
-* `DAO` is responsible for communicate, translate, and bridge the gap between model and middleware.
-* `Middleware` is basically a low-level operation. For instance, CRUD operations for database are implemented. This should be lean and simple.
+* `Route` is responsible for validation and routing to an appropriate controller.
+* `Controller` is responsible for gathering all user inputs, construct a strongly type data (model) from it and pass to DAO.
+* `Model` is responsible for serialize and deserialize data. It basically takes care of itself (i.e. update CAS, timestamp and etc).
+* `DAO` is responsible for communicate, translate, and bridge the gap between model and middleware (i.e. check for CAS before update/delete).
+* `Middleware` is basically a low-level operation (i.e. CRUD operations for database). This should be lean and simple.
