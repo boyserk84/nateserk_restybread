@@ -1,3 +1,9 @@
+/**
+* index.js
+* This is the main Node.js application.
+* @author Nate K. (nkemavaha@gmail.com)
+*/
+
 'use strict';
 
 /** Load environment configuration */
@@ -12,12 +18,10 @@ if ( process.env.ENV != "testing ")
 const Hapi = require('hapi');
 const Good = require('good');
 const Constants = require('./src/config/constants.js');
-
 const GoogleDataStore = require('./src/middlewares/googledatastore');
 
 /** Load Content Route */
 const ContentRoute = require('./src/routes/content.js');
-
 
 // Check initialization and its dependencies
 if ( typeof Hapi == 'undefined' )
