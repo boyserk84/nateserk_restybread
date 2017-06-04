@@ -6,13 +6,23 @@
 * @author Nate K.
 */
 'use strict';
+const Moment = require('moment');
+const Aguid = require('aguid');
 
 class BaseModel {
   constructor() {
-    this.id = ''; // ID for look up from DB
-    this.created_at = ''; // Unix timestamp
+    this.id = Aguid(); // ID for look up from DB
+    this.created_at = Moment().unix(); // Unix timestamp
     this.updated_at = ''; // Unix timestamp
-    this.cas = ''; // CAS value
+    this.cas = this.GenerateCAS(); // CAS value
+  }
+
+  /**
+  * Generate CAS value (Check and Set)
+  * Reference: https://stackoverflow.com/questions/22601503/what-is-cas-in-nosql-and-how-to-use-it
+  */
+  GenerateCAS() {
+    return Aguid( this.id + "_" + Moment().unix() );
   }
 
   /** The given type of the model (i.e. className). */
@@ -31,7 +41,14 @@ class BaseModel {
   */
   FromJSON(jsonStr) {
     var obj = JSON.parse(jsonStr);
+    this.FromObject(obj)
+  }
 
+  /**
+  * Helper method to parse the given object to this class.
+  * @param obj        Object
+  */
+  FromObject(obj) {
     for (var prop in obj) {
       if ( this.hasOwnProperty(prop) ) {
         this[prop] = obj[prop];
