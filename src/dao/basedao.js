@@ -7,6 +7,8 @@
 */
 'use strict';
 
+const Moment = require('moment');
+
 class BaseDAO {
 
     constructor(model, dbAdapter) {
@@ -25,12 +27,30 @@ class BaseDAO {
     }
 
     Delete(callback) {
-      // TODO: Check if atomic ensure or CAS is needed.
-      this.database.Delete( this.model.id, callback );
+      let cas = this.model.cas;
+      let id = this.model.id;
+      let db = this.database;
+
+      // First fetch CAS data
+      this.Get( function(result) {
+        if ( result ) {
+            // If CAS data matches then we allow DELETE operation.
+            if ( result.cas === cas ) {
+              db.Delete( id, callback );
+              return;
+            }
+
+            // Otherwise, we return false.
+            callback(false);
+        }
+
+      });
     }
 
     Update(callback) {
-
+      // TODO: Test this
+      this.model.updated_at = Moment().unix();
+      this.database.Update( this.model.id, this.model, callback );
     }
 
     Get(callback) {
