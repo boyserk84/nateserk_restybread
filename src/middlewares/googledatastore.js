@@ -7,8 +7,9 @@
 'use strict';
 
 const DataStore = require('@google-cloud/datastore');
+const BaseDBMiddleware = require('./basedbmiddleware');
 
-class GoogleDataStore {
+class GoogleDataStore extends BaseDBMiddleware {
 
   /**
   * Default Constructor
@@ -17,6 +18,7 @@ class GoogleDataStore {
   * @param kind           Kind (aka namespace or name of the table)
   */
   constructor(projId, pathToKey, kind) {
+      super();
       this._dataStore = new DataStore(
         {
           projectId: projId,  // see https://cloud.google.com/datastore/docs/reference/libraries#client-libraries-install-nodejs
