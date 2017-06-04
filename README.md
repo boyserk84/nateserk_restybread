@@ -77,7 +77,7 @@ At the high level, the application can be described as the following diagram:
 Routes => Controllers => Models => DAO => Middleware
 ```
 
-`Routes` is responsible for validation and routing to an appropriate controller.
-`Controllers` is responsible for gathering all user inputs, construct a strongly type data (model) from it and pass to DAO.
-`DAO` is responsible for communicate and bridge the gap between model and middleware.
-`Middleware` is basically the low-level operation. For instance, CRUD operations for database are implemented. This should be lean and simple.
+* `Routes` is responsible for validation and routing to an appropriate controller.
+* `Controllers` is responsible for gathering all user inputs, construct a strongly type data (model) from it and pass to DAO.
+* `DAO` is responsible for communicate, translate, and bridge the gap between model and middleware.
+* `Middleware` is basically a low-level operation. For instance, CRUD operations for database are implemented. This should be lean and simple.
