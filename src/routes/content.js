@@ -78,10 +78,14 @@ exports.register = function(server, options, next) {
                   handler: controller.Update,
                   validate: {
                       params: {
-                          id: Joi.string().regex(/[a-zA-Z0-9]{16}/)
+                          id: Joi.string().required()
                       },
-                      // TODO: test this validation
-                      payload: Joi.object().required()
+                      payload: {
+                          cas : Joi.string().required(),
+                          title: Joi.string(),
+                          desc: Joi.string(),
+                          published_at: Joi.date().timestamp('unix')
+                      }
                   }
               }
           },
