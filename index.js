@@ -92,7 +92,7 @@ server.register(plugins, function (err) {
         {
             if (err) { throw err; }
 
-            // example
+            // Example endpoint - you can remove this
             server.route([
                 {
                     method: 'GET',
