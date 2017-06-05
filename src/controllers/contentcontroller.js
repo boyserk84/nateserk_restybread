@@ -49,7 +49,7 @@ class ContentController extends BaseCRUDController{
           console.log(result);
           let codeStatus = 500;
           if ( result ) {
-            codeStatus = 201;
+            codeStatus = 201; // Content created
           }
 
           if ( callback ) {
@@ -69,9 +69,9 @@ class ContentController extends BaseCRUDController{
       dao.Delete(
         function (result) {
           console.log(result);
-          let codeStatus = 500;
+          let codeStatus = 202; // Accepted, but no doing anything
           if ( result ) {
-            codeStatus = 202;
+            codeStatus = 200; // OK, delete success
           }
 
           if ( callback ) {
@@ -80,23 +80,28 @@ class ContentController extends BaseCRUDController{
 
         }
       );
-      return { code: 204 };
     }
 
-    _Update(id, params) {
-      // TODO: Implement this
+    _Update(id, data, callback) {
       let model = new ContentModel();
-      console.log(params);
-      model.FromJSON( params );
+      model.id= id;
+      model.FromObject( data );
+      let dao = new ContentDAO(model, this._dbAdapter);
 
-      // TODO: Test if other fields being override or partial update allowed
-      //let dao = new ContentDAO(model, this._dbAdapter);
+      dao.Update(
+        function(result) {
+          let codeStatus = 500;
 
-      model.updated_at = Date.now();
+          if ( result ) {
+            codeStatus = 200; // OK
+          }
 
-      console.log("Model=" + model);
+          if ( callback ) {
+            callback( { code: codeStatus } );
+          }
 
-      return { code: 200 };
+        }
+      );
     }
 }
 

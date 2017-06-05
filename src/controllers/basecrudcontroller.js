@@ -20,7 +20,7 @@ class BaseCRUDController {
 
   _GetById(id, callback) { throw("unimplemented in the child controller."); }
   _Create(params, callback) { throw("unimplemented in the child controller."); }
-  _Update(id, params, callback) { throw("unimplemented in the child controller."); }
+  _Update(id, data, callback) { throw("unimplemented in the child controller."); }
   _Delete(id, cas, callback) { throw("unimplemented in the child controller."); }
   _Query(params) { throw("unimplemented in the child controller."); }
 
@@ -37,7 +37,7 @@ class BaseCRUDController {
   }
 
   Update(request, reply) {
-      reply( this._Update(request.params.id, request.params) );
+      this._Update(request.params.id, request.payload, function(response) { reply(response); });
   }
 
   Delete(request, reply) {
