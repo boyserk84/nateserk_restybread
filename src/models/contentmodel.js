@@ -21,7 +21,7 @@ class ContentModel extends BaseModel {
   GetType() {
     return "ContentModel";
   }
-  
+
 }
 
 module.exports = ContentModel;

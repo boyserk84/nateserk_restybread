@@ -55,6 +55,27 @@ class BaseModel {
       }//if
     }//for
   }
+
+  /**
+  * Helper method to determine if the given property is READ-ONLY.
+  * Therefore, it cannot be updated during the merge.
+  * @param prop         Name of the property
+  */
+  IsPropertyReadOnly(prop) {
+    return ("created_at, id").indexOf(prop) < 0;  // check if prop is NOT in the blacklist.
+  }
+
+  /**
+  * Helper method to merge data from the given object, ignoring empty fields.
+  * @param obj        Object
+  */
+  MergeDataFromObject(obj) {
+    for (var prop in obj) {
+      if ( this.hasOwnProperty(prop) && obj[prop] && this.IsPropertyReadOnly(prop) ) {
+        this[prop] = obj[prop];
+      }//if
+    }//for
+  }
 }
 
 module.exports = BaseModel;
