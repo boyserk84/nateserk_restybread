@@ -24,7 +24,7 @@ class BaseDBMiddleware {
     throw("Child class must implement 'Delete' method!");
   }
 
-  Update(id, data, callback) {
+  Update(id, newData, callback) {
     throw("Child class must implement 'Update' method!");
   }
 }

@@ -112,9 +112,16 @@ class GoogleDataStore extends BaseDBMiddleware {
     );
   }
 
-  Update(id, data, callback) {
+  /**
+  * Update data/row of the given Id
+  * @param id
+  * @param newData
+  * @param callback
+  */
+  Update(id, newData, callback) {
+    // NOTE: There is NO partial update for Google Data Store unlike MongoDB.
     const dataStoreKey = this._dataStore.key([this._kind, id]);
-    this._dataStore.save( { key: dataStoreKey, data:dataObj },
+    this._dataStore.update( { key: dataStoreKey, data: newData },
       function(err) {
           if ( err ) {
             // TODO: Log error
