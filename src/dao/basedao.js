@@ -22,6 +22,10 @@ class BaseDAO {
       this.database = dbAdapter;
     }
 
+    Get(callback) {
+      this.database.Get( this.model.id, callback );
+    }
+
     Create(callback) {
       this.database.Create( this.model.id, this.model, callback );
     }
@@ -40,6 +44,8 @@ class BaseDAO {
               return;
             }
 
+            console.log("CAS mismatch");
+
             // Otherwise, we return false.
             callback(false);
         }
@@ -48,8 +54,6 @@ class BaseDAO {
     }
 
     Update(callback) {
-      // TODO: Test this
-      let newCAS = this.model.GenerateCAS();
       let data = this.model;
       let id = this.model.id;
       let cas = this.model.cas;
@@ -62,11 +66,14 @@ class BaseDAO {
             // If CAS data matches then we allow UPDATE operation.
             if ( result.cas === cas ) {
               data = that._MergeData( result, data );  // Merge data if partial update isn't allowed.
-              data.cas = newCAS;  // Regenerate a new CAS
+              data.cas = data.GenerateCAS();  // Regenerate a new CAS
               data.updated_at = Moment().unix();  // update unix timestamp
+
               db.Update( id, data, callback );
               return;
             }
+
+            console.log("CAS mismatch!");
 
             // Otherwise, we return false.
             callback(false);
@@ -82,10 +89,6 @@ class BaseDAO {
     */
     _MergeData(remoteData, model ) {
       throw("Child DAO must implement '_MergeData' method!");
-    }
-
-    Get(callback) {
-      this.database.Get( this.model.id, callback );
     }
 
     Query(params, callback) {
