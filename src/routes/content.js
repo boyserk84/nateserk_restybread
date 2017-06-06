@@ -37,14 +37,22 @@ exports.register = function(server, options, next) {
       // API End points for Contents
       server.route([
           {
-              method: 'GET', path: '/content',
+              method: 'POST', path: '/contents',
               config: {
                   handler: controller.Query,
                   validate: {
-                      query: Joi.object().keys({
-                          start: Joi.number().min(0),
-                          limit: Joi.number().min(1)
-                      })
+                      payload: {
+                        limit: Joi.number().min(1),
+                        sortByProp: Joi.string(),
+                        SortDescending: Joi.boolean(),
+                        filters: Joi.array().items(
+                            {
+                              prop: Joi.string(),
+                              val: Joi.any(),
+                              opt: Joi.string()
+                            }
+                        )
+                      }
                   }
               }
           },

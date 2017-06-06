@@ -29,21 +29,54 @@ class GoogleDataStore extends BaseDBMiddleware {
       this._kind = kind;
   }
 
+  /**
+  * Helper method to parse a generic query object into Google Query object.
+  * @param query          Query Object
+  */
+  ParseAndConstructQuery(query) {
+    let limit = 50;
+    // construct a query
+    let gquery = this._dataStore.createQuery(this._kind);
+
+    if ( query.filters ) {
+      for (let i = 0; i < query.filters.length; ++i ) {
+        let filter = query.filters[i];
+        if ( filter && filter.prop && filter.val && filter.opt) {
+          gquery.filter(filter.prop, filter.opt , filter.val );
+        }
+      }//for
+    }
+
+    if ( query.sortByProp ) {
+      gquery.order( query.sortByProp, { descending: query.SortDescending } );
+    }
+
+    if ( query.limit ) {
+      gquery.limit( query.limit );
+    } else {
+      gquery.limit(limit);
+    }
+
+    return gquery;
+  }
+
   Query(query, callback) {
-    // this._dataStore.runQuery(query,
-    //     function(err, result)
-    //     {
-    //         if ( err ) {
-    //           // TODO: Log Error
-    //           console.log(err);
-    //           result = [];
-    //         }
-    //
-    //         if ( callback && typeof(callback) === 'function') {
-    //           callback(result);
-    //         }
-    //     }
-    // );
+    let gquery = this.ParseAndConstructQuery(query);
+
+    this._dataStore.runQuery(gquery,
+        function(err, result)
+        {
+            if ( err ) {
+              // TODO: Log Error
+              console.log(err);
+              result = [];
+            }
+
+            if ( callback && typeof(callback) === 'function') {
+              callback(result);
+            }
+        }
+    );
   }
 
   /**

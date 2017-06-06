@@ -91,8 +91,8 @@ class BaseDAO {
       throw("Child DAO must implement '_MergeData' method!");
     }
 
-    Query(params, callback) {
-
+    Query(query, callback) {
+      this.database.Query( query, callback );
     }
 
 }
