@@ -62,7 +62,7 @@ var plugins = [
             adapter: new GoogleDataStore(
               process.env.GCLOUD_DATASTORE_KEY_PATH,
               process.env.GCLOUD_DATASTORE_PROJECT_ID,
-              Constants.GOOGLE_DATASTORE_KIND_CONTENT
+              process.env.GCLOUD_DATASTORE_KIND_CONTENT
             )
         }
     }

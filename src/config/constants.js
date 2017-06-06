@@ -10,5 +10,4 @@
 //  i.e. KEY: VALUE
 module.exports = {
   EXAMPLE_VALUE : "DUMMY_VALUE",            // Replace this with your constants
-  GOOGLE_DATASTORE_KIND_CONTENT: "recordkeeper"
 };
