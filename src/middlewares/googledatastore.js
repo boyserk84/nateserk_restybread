@@ -60,6 +60,13 @@ class GoogleDataStore extends BaseDBMiddleware {
     return gquery;
   }
 
+  /**
+  * Retrieve data based on the given query.
+  * NOTE: configure index.yaml is required.
+  * See: https://cloud.google.com/datastore/docs/tools/indexconfig
+  * @param query          Generic query object
+  * @param callback
+  */
   Query(query, callback) {
     let gquery = this.ParseAndConstructQuery(query);
 

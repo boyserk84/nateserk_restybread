@@ -106,8 +106,6 @@ class ContentController extends BaseCRUDController{
 
     _Query(query, callback) {
       let dao = new ContentDAO( new ContentModel(), this._dbAdapter);
-      console.log("COntroller");
-      console.log(query);
       dao.Query( query,
         function(result) {
           let codeStatus = 400;
