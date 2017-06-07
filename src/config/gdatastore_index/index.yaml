@@ -1,0 +1,16 @@
+# Google DataStore Indexing
+# gcloud tool is required.
+# See: https://cloud.google.com/datastore/docs/tools/indexconfig
+# See: https://stackoverflow.com/questions/37695614/error-when-creating-indexes-for-flexible-cloud-datastore-unexpected-attribute
+
+indexes:
+
+- kind: CHANGE_TO_YOUR_KIND_VALUE
+  ancestor: no
+  properties:
+  - name: title
+  - name: desc
+  - name: created_at
+  - name: updated_at
+  - name: published_at
+  - name: id
