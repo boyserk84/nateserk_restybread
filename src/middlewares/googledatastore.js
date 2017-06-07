@@ -63,6 +63,7 @@ class GoogleDataStore extends BaseDBMiddleware {
   /**
   * Retrieve data based on the given query.
   * NOTE: configure index.yaml is required.
+  * See `scripts/gdatastore_indexing.sh` and `src/config/gdatastore_index/index.yaml`.
   * See: https://cloud.google.com/datastore/docs/tools/indexconfig
   * @param query          Generic query object
   * @param callback
