@@ -95,6 +95,10 @@ class BaseDAO {
       this.database.Query( query, callback );
     }
 
+    BatchDeleteByIds(ids, callback) {
+      this.database.BatchDeleteByIds( ids, callback );
+    }
+
 }
 
 module.exports = BaseDAO;

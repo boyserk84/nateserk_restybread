@@ -13,7 +13,7 @@ const ContentModel = require('../models/contentmodel');
 class ContentDAO extends BaseDAO {
 
     constructor(model, dbAdapter) {
-        // TODO: Check if model is from the certain class.
+        // Check if model is from the certain class.
         if (model && model.GetType() === "ContentModel") {
           super(model, dbAdapter);
         } else {

@@ -57,6 +57,17 @@ exports.register = function(server, options, next) {
               }
           },
           {
+              method: 'DELETE', path: '/contents',
+              config: {
+                  handler: controller.BatchDeleteByIds,
+                  validate: {
+                      payload: {
+                        ids: Joi.array().items().required()
+                      }
+                  }
+              }
+          },
+          {
               method: 'GET', path: '/content/{id}',
               config: {
                   handler: controller.Get,

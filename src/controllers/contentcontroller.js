@@ -82,6 +82,10 @@ class ContentController extends BaseCRUDController{
       );
     }
 
+    _BatchDeleteByIds(ids, callback) {
+      // TODO: Implement this
+    }
+
     _Update(id, data, callback) {
       let model = new ContentModel();
       model.id= id;

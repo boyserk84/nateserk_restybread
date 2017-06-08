@@ -24,6 +24,10 @@ class BaseDBMiddleware {
     throw("Child class must implement 'Delete' method!");
   }
 
+  BatchDeleteByIds(ids, callback) {
+    throw("Child class must implement 'BatchDeleteByIds' method!");
+  }
+
   Update(id, newData, callback) {
     throw("Child class must implement 'Update' method!");
   }
