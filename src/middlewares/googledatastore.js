@@ -47,8 +47,11 @@ class GoogleDataStore extends BaseDBMiddleware {
       }//for
     }
 
+    // By default, sort descending is true
+    let sortDesc = ( typeof query.SortDescending !== 'undefined' )? query.SortDescending: true;
+
     if ( query.sortByProp ) {
-      gquery.order( query.sortByProp, { descending: query.SortDescending } );
+      gquery.order( query.sortByProp, { descending: sortDesc } );
     }
 
     if ( query.limit ) {
@@ -151,6 +154,15 @@ class GoogleDataStore extends BaseDBMiddleware {
           }
       }
     );
+  }
+
+  // Batch operation for delete
+
+  BatchDeleteByIds(ids, callback) {
+      // check if ids is array
+
+      // TODO: Implement this
+      throw("Implementation needed");
   }
 
   /**
