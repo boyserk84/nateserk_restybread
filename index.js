@@ -60,8 +60,8 @@ var plugins = [
         register: ContentRoute,
         options: {
             adapter: new GoogleDataStore(
-              process.env.GCLOUD_DATASTORE_KEY_PATH,
               process.env.GCLOUD_DATASTORE_PROJECT_ID,
+              process.env.GCLOUD_DATASTORE_KEY_PATH,
               process.env.GCLOUD_DATASTORE_KIND_CONTENT
             )
         }
