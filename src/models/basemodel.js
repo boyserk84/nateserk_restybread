@@ -15,6 +15,7 @@ class BaseModel {
     this.created_at = Moment().unix(); // Unix timestamp
     this.updated_at = ''; // Unix timestamp
     this.cas = this.GenerateCAS(); // CAS value
+    this.ownerId = '';  // OwnerId
   }
 
   /**
