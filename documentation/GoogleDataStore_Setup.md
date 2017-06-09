@@ -50,8 +50,13 @@ Run the following command to setup or update indexes:
 sh scripts/gdatastore_indexing.sh delete
 ```
 
-
-
 # Note for composite indexes:
 * All properties defined in a query must exactly match index definitions in `index.yaml`. Otherwise, you will get `no matching index found.`.
 * You can have multiple indexing defined in `index.yaml`.
+
+
+# Integrate DataStore to your Application
+If you are running your application (externally outside Google Cloud), service account key is required for authentication.
+1. You will need to setup a service account. See `Setting up a service account` at  https://cloud.google.com/docs/authentication#getting_credentials_for_server-centric_flow.
+2. Once the setup is done, there will be JSON file contains your key (aka credentials) to download to your computer or server.
+3. In `src/config/.env`, you will need to define `GCLOUD_DATASTORE_KEY_PATH` to your service account JSON key path.
