@@ -7,10 +7,34 @@
 #
 # NOTE:
 # - Make sure to run `gcloud init` to have configuration pointing to the correct project.
+#
+#################
+# Instructions
+#################
+#
+# To create/update indexing: Run the following command,
+#     sh gdatastore_indexing.sh create
+# To clean up/remove indexing: Run the following command,
+#     sh gdatastore_indexing.sh delete
 
-# TODO: Make it a command line (create vs delete)
+indexing_file_path="../src/config/gdatastore_index/index.yaml"
 
-echo "CREATING INDEXES FOR GOOGLE DATASTORE from index.yaml.\n"
-gcloud datastore create-indexes ../src/config/gdatastore_index/index.yaml
-
-# Delete INDEXES
+if [ -f "$indexing_file_path" ]; then
+  if [ "$1" != "" ]; then
+    if [ "$1" == "create" ]; then
+      # CREATE INDEXES
+      echo "Creating Google DataStore Indexes from index.yaml.\n"
+      gcloud datastore create-indexes $indexing_file_path
+    elif [ "$1" == "delete" ]; then
+      # CLEAN UP INDEXES
+      echo "Cleaning up Google DataStore Indexes specified in index.yaml.\n"
+      gcloud datastore cleanup-indexes $indexing_file_path
+    else
+      echo "Unknow command '$1'. Abort!\n"
+    fi
+  else
+    echo "Missing a command. Abort! \n"
+  fi
+else
+  echo "'index.yaml' does not exist in src/config/gdatastore_index/ directory. Abort!\n"
+fi
