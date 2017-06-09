@@ -44,11 +44,15 @@ sh scripts/gdatastore_indexing.sh create
 Check your Google DataStore Console. Click `Indexes` tab and see if your indexes status is `serving`.
 Otherwise, you may get indexing not ready error message.
 
-# Clean Up Indexing
-Run the following command to setup or update indexes:
+# Clean Up or Removing Indexing
+1. Open `index.yaml`, remove any index you no longer need, and save.
+
+2. Run the following command to setup or update indexes:
 ```
 sh scripts/gdatastore_indexing.sh delete
 ```
+
+3. Check your Google DataStore Console. The removed index will have `Removing` status or be non-existent.
 
 # Note for composite indexes:
 * All properties defined in a query must exactly match index definitions in `index.yaml`. Otherwise, you will get `no matching index found.`.
