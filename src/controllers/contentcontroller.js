@@ -83,7 +83,22 @@ class ContentController extends BaseCRUDController{
     }
 
     _BatchDeleteByIds(ids, callback) {
-      // TODO: Implement this
+      let model = new ContentModel();
+      let dao = new ContentDAO(model, this._dbAdapter);
+
+      dao.BatchDeleteByIds( ids ,
+          function(result) {
+            let codeStatus = 202;
+
+            if ( result ) {
+              codeStatus = 200; // OK, delete success
+            }
+
+            if ( callback ) {
+              callback( { code: codeStatus } );
+            }
+          }
+      );
     }
 
     _Update(id, data, callback) {

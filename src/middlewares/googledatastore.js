@@ -9,6 +9,8 @@
 const DataStore = require('@google-cloud/datastore');
 const BaseDBMiddleware = require('./basedbmiddleware');
 
+const isArray = require('isarray'); // This probably is JOI dependency.
+
 class GoogleDataStore extends BaseDBMiddleware {
 
   /**
@@ -155,14 +157,45 @@ class GoogleDataStore extends BaseDBMiddleware {
       }
     );
   }
-
-  // Batch operation for delete
-
+  /**
+  * Batch operation for delete
+  * @param ids          List of all ids
+  * @param callback
+  */
   BatchDeleteByIds(ids, callback) {
-      // check if ids is array
+      if ( !isArray(ids) ) {
+        console.log("BatchDeleteByIds parameter='ids' is NOT array.");
+        if ( callback ) {
+            callback( false );
+        }
+        return;
+      }
 
-      // TODO: Implement this
-      throw("Implementation needed");
+      let keys = [];
+      for(let i = 0; i < ids.length ; ++i) {
+        keys.push( this._dataStore.key( [ this._kind, ids[i] ] ) );
+      }//for
+
+      if ( keys.length > 0 ) {
+          this._dataStore.delete(keys,
+            function(err) {
+                if ( err ) {
+                  // TODO: Log error
+                  console.log(err);
+                }
+
+                if ( callback ) {
+                    callback( (err)?false:true );
+                }
+
+            }
+          );
+      } else {
+        console.log("BatchDeleteByIds empty 'ids' array.");
+        if ( callback ) {
+            callback( false );
+        }
+      }
   }
 
   /**

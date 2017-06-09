@@ -46,7 +46,7 @@ class BaseCRUDController {
   }
 
   BatchDeleteByIds(request, reply) {
-      this._BatchDeleteByIds(request.params.payload, function(response){ reply(response); } );
+      this._BatchDeleteByIds(request.payload.ids, function(response){ reply(response); } );
   }
 }
 
