@@ -1,6 +1,6 @@
 {
   "name": "nateserk_restybread",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Boilerplate for quickly build C.R.U.D Rest(ful) API with Node.js and Hapi.js.",
   "main": "index.js",
   "scripts": {
