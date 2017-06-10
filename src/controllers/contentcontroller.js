@@ -10,7 +10,6 @@
 const BaseCRUDController = require('./basecrudcontroller');
 const ContentModel = require('../models/contentmodel');
 const ContentDAO = require('../dao/content');
-const GoogleDataStore = require('../middlewares/googledatastore');
 
 
 class ContentController extends BaseCRUDController{
