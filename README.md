@@ -18,9 +18,19 @@ DELETE  http://localhost:8000/content/{id}
 ```
 
 # Update/Changelog
+
+* 06/09/2017 Version 1.0.1
+```
+* Support `JWT` Authentication
+```
+
 * 05/15/2017 Version 1.0.0
-* CRUD endpoint for the given id of data.
-* Support 'Google DataStore'
+```
+* CRUD `content` endpoint for the given id of data.
+* Query `content` endpoint.
+* Batch DELETE operation on `content` endpoint.
+* Support `Google DataStore`
+```
 
 # How to Guide
 ### Step 1: Installation
@@ -54,6 +64,7 @@ Congratulation! You have successfully launched API endpoint.
 ```
 package.json        All Node.JS application dependencies.
 index.js            Main Node.js for launching and running API instance.
+documentation/      Additional documentations for setting up dependencies (i.e. Google DataStore)
 src/    
 |-config/                   Configuration folder
   |-constants.js            Constants values for the entire application.
@@ -65,7 +76,10 @@ src/
 |-routes/                   Routes folder
   |-content.js              API route endpoint for 'content'
 |-middlewares/              Middleware folder (Auth, database, bridge)
-  |-googledatastore.js      Adapter for connecting to Google DataStore
+  |-database
+    |-googledatastore.js    Adapter for connecting to Google DataStore
+  |-authentication
+    |-jwt_auth              JWT Authentication Strategy
 |-dao/                      Direct Access Object folder (all objects interact with DB.)
   |-basedao.js              Base DAO for common functionality
   |-contentdao.js           ContentDAO extends from BaseDAO
