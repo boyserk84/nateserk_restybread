@@ -18,7 +18,8 @@ if ( process.env.ENV != "testing ")
 const Hapi = require('hapi');
 const Good = require('good');
 const Constants = require('./src/config/constants.js');
-const GoogleDataStore = require('./src/middlewares/googledatastore');
+const GoogleDataStore = require('./src/middlewares/database/googledatastore');
+const JWTAuth = require('./src/middlewares/authentication/jwt_auth');
 
 /** Load Content Route */
 const ContentRoute = require('./src/routes/content.js');
@@ -56,6 +57,15 @@ var plugins = [
             }
         }
     },
+    /** Authentication
+    {
+        register: JWTAuth,
+        options: {
+          privateKey: process.env.SECRET_AUTH_KEY,
+          algorithms: { algorithms: [ 'HS256' ] }
+        }
+    },
+    **/
     {
         register: ContentRoute,
         options: {
