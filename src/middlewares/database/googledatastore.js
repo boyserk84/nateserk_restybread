@@ -164,6 +164,7 @@ class GoogleDataStore extends BaseDBMiddleware {
   */
   BatchDeleteByIds(ids, callback) {
       if ( !isArray(ids) ) {
+        // TODO: Error log this
         console.log("BatchDeleteByIds parameter='ids' is NOT array.");
         if ( callback ) {
             callback( false );
@@ -172,10 +173,12 @@ class GoogleDataStore extends BaseDBMiddleware {
       }
 
       let keys = [];
+      // Construct keys to delete
       for(let i = 0; i < ids.length ; ++i) {
         keys.push( this._dataStore.key( [ this._kind, ids[i] ] ) );
       }//for
 
+      // If empty, we're not making any call to GoogleDataStore
       if ( keys.length > 0 ) {
           this._dataStore.delete(keys,
             function(err) {
