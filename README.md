@@ -96,3 +96,25 @@ Route => Controller => Model => DAO => Middleware
 * `Model` is responsible for serialize and deserialize data. It basically takes care of itself (i.e. update CAS, timestamp and etc).
 * `DAO` is responsible for communicate, translate, and bridge the gap between model and middleware (i.e. check for CAS before update/delete).
 * `Middleware` is basically a low-level operation (i.e. CRUD operations for database). This should be lean and simple.
+
+# How to Add a new API Endpoint
+Generally, you will need the followings:
+* Route
+* Controller
+* Model
+* DAO
+
+Once you have all these setup, you will need to register your route to `index.js`.
+For instance,
+```
+{
+    register: YOUR_ROUTE,
+    options: {
+        adapter: YOUR_DB_ADAPTER_INSTANCE,
+        YOUR_OTHER_ATTRIBUTE: YOUR_OTHER_INSTANCE
+    }
+}
+```
+
+You can see example from `content` API endpoint.
+It has `routes/content`, `controllers/ContentController`, `models/content`, and `dao/content`.
