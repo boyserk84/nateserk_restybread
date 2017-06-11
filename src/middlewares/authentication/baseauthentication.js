@@ -12,6 +12,7 @@
 class BaseAuthentication {
     Validate( decoded, request, callback ) {
         throw("Derived class must implement 'Validate' method!");
+        return false;
     }
 }
 
