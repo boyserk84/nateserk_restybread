@@ -11,10 +11,12 @@ Boilerplate for quickly build C.R.U.D Rest(ful) API with Node.js and Hapi.js.
 
 # List of Rest API Endpoint Ready Out of the box
 ```
-POST    http://localhost:8000/content
-GET     http://localhost:8000/content/{id}
-PUT     http://localhost:8000/content/{id}
-DELETE  http://localhost:8000/content/{id}
+POST    http://localhost:8000/content           Create a new content
+GET     http://localhost:8000/content/{id}      Fetch the content
+PUT     http://localhost:8000/content/{id}      Update the content
+DELETE  http://localhost:8000/content/{id}      Delete the content
+POST    http://localhost:8000/contents          Query multiple contents
+DELETE  http://localhost:8000/contents          Delete multiple contents
 ```
 
 # Update/Changelog
