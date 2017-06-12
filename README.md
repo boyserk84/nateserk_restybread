@@ -3,7 +3,7 @@
 [![Dependency status](https://david-dm.org/boyserk84/nateserk_restybread.svg)](https://david-dm.org/boyserk84/nateserk_restybread)
 
 # Description
-Boilerplate for quickly build C.R.U.D Rest(ful) API with Node.js and Hapi.js.
+Boilerplate and building block for quickly build C.R.U.D Rest(ful) API with Node.js and Hapi.js.
 
 ## Requirements
 * Node.js (version 6 or above)
@@ -23,7 +23,8 @@ DELETE  http://localhost:8000/contents          Delete multiple contents
 
 * 06/09/2017 Version 1.0.1
 ```
-* Support `JWT` Authentication
+* Support `JWT` (Json Web Token) Authentication strategy.
+* Support `Auth0` Authentication strategy (Pending).
 ```
 
 * 05/15/2017 Version 1.0.0
@@ -31,7 +32,7 @@ DELETE  http://localhost:8000/contents          Delete multiple contents
 * CRUD `content` endpoint for the given id of data.
 * Query `content` endpoint.
 * Batch DELETE operation on `content` endpoint.
-* Support `Google DataStore`
+* Support `Google DataStore` integration as a database.
 ```
 
 # How to Guide
