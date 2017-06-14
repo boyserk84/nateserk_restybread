@@ -19,7 +19,8 @@ const Hapi = require('hapi');
 const Good = require('good');
 const Constants = require('./src/config/constants.js');
 const GoogleDataStore = require('./src/middlewares/database/googledatastore');
-const JWTAuth = require('./src/middlewares/authentication/jwt_auth');
+//const JWTAuth = require('./src/middlewares/authentication/jwt_auth');
+const Auth0 = require('./src/middlewares/authentication/auth0');
 
 /** Load Content Route */
 const ContentRoute = require('./src/routes/content.js');
@@ -57,15 +58,18 @@ var plugins = [
             }
         }
     },
-    /** Authentication
+    /**
     {
         register: JWTAuth,
         options: {
-          privateKey: process.env.SECRET_AUTH_KEY,
+          privateKey: process.env.SECRET_JWT_AUTH_KEY,
           algorithms: { algorithms: [ 'HS256' ] }
         }
     },
     **/
+    {
+        register: Auth0
+    },
     {
         register: ContentRoute,
         options: {
@@ -82,14 +86,22 @@ var plugins = [
 const server = new Hapi.Server(
   {
     debug: {
-      request: ['info', 'error']
+      request: ['info','error']
     }
   }
 );
 
 server.connection({
     host: 'localhost',
-    port: 8000
+    port: 8000,
+    routes: {
+      /** This is required for support modern browser CORS mechanism (see https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).*/
+      cors: {
+          origin: ['*'],
+          credentials: true,
+          headers: ["Accept", "Authorization", "Content-Type", "If-None-Match", "Accept-language"]  // This must match request headers.
+      }
+    }
 });
 
 
@@ -107,13 +119,44 @@ server.register(plugins, function (err) {
                 {
                     method: 'GET',
                     path: '/example',
-                    handler:
+                    config: {
+                      auth: false,
+                      handler:
                         function(request, reply)
                         {
-                            reply({text: 'Here is the sample response!'});
+                          reply( { text: 'Here is the sample response!' } );
                         }
+                    }
 
-                }]
+                },
+                // Example of restricted endpoint using JWT authentication
+                {
+                    method: 'GET',
+                    path: '/restricted',
+                    config: {
+                      handler:
+                        function (request, reply)
+                        {
+                          reply( { text: 'You have used your token!' } );
+                        }
+                    }
+                },
+                // Example of restricted endpoint with Auth0 Authentication and Auth0's Scope
+                {
+                    method: 'GET',
+                    path: '/privatescope',
+                    config: {
+                       auth: {
+                         scope: 'openid profile read:content',
+                      },
+                      handler:
+                        function (request, reply)
+                        {
+                          reply( { text: 'You have used your token with the correct scope!' } );
+                        }
+                    }
+                }
+              ]
             );
 
             server.log('info', 'Server running at: ' + server.info.uri);
