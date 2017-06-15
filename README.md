@@ -83,6 +83,7 @@ src/
     |-googledatastore.js    Adapter for connecting to Google DataStore
   |-authentication
     |-jwt_auth              JWT Authentication Strategy
+    |-auth0                 Auth0 Authentication Strategy
 |-dao/                      Direct Access Object folder (all objects interact with DB.)
   |-basedao.js              Base DAO for common functionality
   |-contentdao.js           ContentDAO extends from BaseDAO
@@ -95,10 +96,10 @@ Route => Controller => Model => DAO => Middleware
 ```
 
 * `Route` is responsible for validation and routing to an appropriate controller.
-* `Controller` is responsible for gathering all user inputs, construct a strongly type data (model) from it and pass to DAO.
+* `Controller` is responsible for gathering all user inputs, construct a strongly type data (aka Model) from it and pass to DAO.
 * `Model` is responsible for serialize and deserialize data. It basically takes care of itself (i.e. update CAS, timestamp and etc).
 * `DAO` is responsible for communicate, translate, and bridge the gap between model and middleware (i.e. check for CAS before update/delete).
-* `Middleware` is basically a low-level operation (i.e. CRUD operations for database). This should be lean and simple.
+* `Middleware` basically handles things directly related to low-level operations (i.e. CRUD operations for database, authentication). This should be lean and simple.
 
 # How to Add a new API Endpoint
 Generally, you will need the followings:
