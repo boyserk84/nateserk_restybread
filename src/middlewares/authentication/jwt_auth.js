@@ -33,7 +33,7 @@ exports.register = function (server, options, next) {
 
         // We're giving the strategy both a name
         // and scheme of 'jwt'
-        server.auth.strategy('jwt', 'jwt',
+        server.auth.strategy('jwt', 'jwt', process.env.DEFAULT_AUTH_MODE
         {
               key: options.privateKey,                        // Never Share your secret key
               validateFunc: new JWTAuth().Validate,                 // validate function
@@ -41,7 +41,7 @@ exports.register = function (server, options, next) {
             }
         );
 
-        server.auth.default(process.env.AUTH_STRATEGY);
+        server.auth.default('jwt');
     });
 
     next();

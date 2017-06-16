@@ -19,6 +19,9 @@ class Auth0 extends BaseAuthentication {
     // the needs of your application
     console.log("Validate is called for Auth0!");
     // TODO: Implement this to suit your application
+    // i.e. check if token is blacklisted or revoked.
+
+    console.log( decoded );
     if (decoded && decoded.sub) {
       return callback(null, true);
     }
@@ -41,7 +44,7 @@ exports.register = function (server, options, next) {
         }
 
         // Auth0 is using RSA256 algorithm by default.
-        server.auth.strategy('jwt', 'jwt', 'required',
+        server.auth.strategy('jwt', 'jwt', process.env.DEFAULT_AUTH_MODE,
         {
             complete: true,
             // verify the access token against the
@@ -59,7 +62,6 @@ exports.register = function (server, options, next) {
             },
             validateFunc: new Auth0().Validate
           });
-
     });
 
     next();

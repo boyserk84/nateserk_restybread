@@ -68,6 +68,7 @@ var plugins = [
     },
     **/
     {
+        // Auth0 Authentication , by default enforce on all routes unless specify otherwise.
         register: Auth0
     },
     {
@@ -95,7 +96,10 @@ server.connection({
     host: 'localhost',
     port: 8000,
     routes: {
-      /** This is required for support modern browser CORS mechanism (see https://en.wikipedia.org/wiki/Cross-origin_resource_sharing).*/
+      /**
+      * This is required for support modern browser CORS mechanism.
+      * see https://en.wikipedia.org/wiki/Cross-origin_resource_sharing for more info.
+      */
       cors: {
           origin: ['*'],
           credentials: true,
@@ -137,7 +141,7 @@ server.register(plugins, function (err) {
                       handler:
                         function (request, reply)
                         {
-                          reply( { text: 'You have used your token!' } );
+                          reply( { text: 'You have used your JwT token!' } );
                         }
                     }
                 },
@@ -147,7 +151,7 @@ server.register(plugins, function (err) {
                     path: '/privatescope',
                     config: {
                        auth: {
-                         scope: 'openid profile read:content',
+                         scope: 'openid read:content write:content',
                       },
                       handler:
                         function (request, reply)
