@@ -9,6 +9,10 @@ Boilerplate and building block for quickly build C.R.U.D Rest(ful) API with Node
 * Node.js (version 6 or above)
 * NPM
 
+## Third party middleware supports
+* Google Data Store https://cloud.google.com/datastore/docs/concepts/overview
+* Auth0 http://www.auth0.com
+
 # List of Rest API Endpoint Ready Out of the box
 ```
 POST    http://localhost:8000/content           Create a new content

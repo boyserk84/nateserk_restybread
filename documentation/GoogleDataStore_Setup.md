@@ -21,7 +21,7 @@ If you did not have any complex query (i.e. only single property query), `built-
 
 However, if there are multiple properties in a query, `composite indexes` are required and need to be configured beforehand.
 
-# What you will need
+## What you will need
 * index.yaml
 ```
 This is for defining your application indexes.
@@ -31,7 +31,7 @@ This is for defining your application indexes.
 This is for create and update all of your indexes definitions from `index.yaml`.
 ```
 
-# First time Setup
+## First time Setup
 
 1. Run the following and make sure the correct project is being used:
 ```
@@ -40,7 +40,7 @@ gcloud init
 
 2. Define and configure your indexes in `index.yaml`. See https://cloud.google.com/datastore/docs/tools/indexconfig.
 
-# Create or Update Indexing
+## Create or Update Indexing
 1. Run the following command to setup or update indexes:
 ```
 sh scripts/gdatastore_indexing.sh create
@@ -50,7 +50,7 @@ sh scripts/gdatastore_indexing.sh create
 Check your Google DataStore Console. Click `Indexes` tab and see if your indexes status is `serving`.
 Otherwise, you may get indexing not ready error message.
 
-# Clean Up or Removing Indexing
+## Clean Up or Removing Indexing
 1. Open `index.yaml`, remove any index you no longer need, and save.
 
 2. Run the following command to setup or update indexes:
@@ -60,7 +60,7 @@ sh scripts/gdatastore_indexing.sh delete
 
 3. Check your Google DataStore Console. The removed index will have `Removing` status or be non-existent.
 
-# Note for composite indexes:
+## Note for composite indexes:
 * All properties defined in a query must exactly match index definitions in `index.yaml`. Otherwise, you will get `no matching index found.`.
 * You can have multiple indexing defined in `index.yaml`.
 

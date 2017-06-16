@@ -16,14 +16,14 @@ Your API endpoint will check `access_token` against your `Auth0 API`.
 
 # Setup Auth0 Client and API
 
-# 1. Setup Auth0 API for your REST API endpoint.
+## 1. Setup Auth0 API for your REST API endpoint.
 1. Once Auth0 account has been created, go to `APIS` section.
 2. Click `CREATE API`
 3. Fill out `Name`, `Identifier` (Recommend by Auth0: Your API URL), and `Signing Algorithm` (Default is RS256, Asymmetry).
 4. Go to `Scopes` and create a new one.
 5. Under `Non Interactive Clients` expand `Authorized` and check the scope you just created and then click `Update`.
 
-# 2. Setup Auth0 Client for your Frontend
+## 2. Setup Auth0 Client for your Frontend
 1. Once Auth0 account has been created, go to `Clients` section.
 2. Click `CREATE CLIENT`
 3. Fill out `NAME` and type of client (either Web Application or Single-page application).
@@ -33,10 +33,10 @@ Your API endpoint will check `access_token` against your `Auth0 API`.
 
 # Integrate Auth0 API and Client with your Frontend and API endpiont
 
-# How to Integrate Auth0 with your API endpoint
+## How to Integrate Auth0 with your API endpoint
 TBA
 
-# How to Integrate Auth0 with your Front End
+## How to Integrate Auth0 with your Front End
 TBA
 
 # NOTE
