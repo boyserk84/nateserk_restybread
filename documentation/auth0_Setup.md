@@ -8,13 +8,14 @@ Author: Nate K. (nkemavaha@gmail.com)
 
 # Overview
 User registers or logs in to your website with your `Auth0 client` as Authentication middleware.
+
 Once the user is successfully logged in, the user will receive `access_token` and redirect to a callback URL.
+
 User will use `access_token` as a part of `Authorization: bearer` header when making a request to your API endpoint.
-Your API endpoint will check `access_token` against your `Auth0 API`.
+
+Your API endpoint will check `access_token` against your `Auth0 API` credentials.
 
 # How to protect your API endpoint with Auth0 Guide
-
-# Setup Auth0 Client and API
 
 ## 1. Setup Auth0 API for your REST API endpoint.
 1. Once Auth0 account has been created, go to `APIS` section.
@@ -31,13 +32,17 @@ Your API endpoint will check `access_token` against your `Auth0 API`.
 5. (Optional) Fill out `Allowed Logout URLs` with your URLs.
 5. Click `SAVE CHANGES`
 
-# Integrate Auth0 API and Client with your Frontend and API endpiont
+# Integrate Auth0
 
-## How to Integrate Auth0 with your API endpoint
+## 1. How to Integrate Auth0 with your API endpoint
 TBA
 
-## How to Integrate Auth0 with your Front End
+Coming Soon
+
+## 2. How to Integrate Auth0 with your Front End
 TBA
+
+Coming Soon
 
 # NOTE
 * `Audience` refers to `unique identifier` or `Identifier` for the API. You will need to define `AUTH0_AUDIENCE` in `.env` with this value.
