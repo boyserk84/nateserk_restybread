@@ -6,11 +6,11 @@
 */
 'use strict';
 
-//var Boom = require('boom');
+const Boom = require('boom');
 const BaseCRUDController = require('./basecrudcontroller');
 const ContentModel = require('../models/contentmodel');
 const ContentDAO = require('../dao/content');
-
+// TODO: Integrate BOOM for error response.
 
 class ContentController extends BaseCRUDController{
     constructor(dbAdapter) {
