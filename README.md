@@ -24,7 +24,7 @@ DELETE  http://localhost:8000/contents          Delete multiple contents
 * 06/09/2017 Version 1.0.1
 ```
 * Support `JWT` (Json Web Token) Authentication strategy.
-* Support `Auth0` Authentication strategy (Pending).
+* Support `Auth0` Authentication strategy.
 ```
 
 * 05/15/2017 Version 1.0.0
