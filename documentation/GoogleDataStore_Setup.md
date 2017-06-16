@@ -12,7 +12,7 @@ Author: Nate K (nkemavaha@gmail.com)
 * Go to Google DataStore by typing in `datastore` in a search box in Google Cloud console (https://console.cloud.google.com).
 * Go to `Entities` and Click `CREATE ENTITY`. This basically defines your JSON data structure.
 * Name `Kind` of your new entity. This is similar to `table name` in the relational database.
-* `Key identifier` is basically auto-generated numeric ID. You can change it to custom name if you have a different pattern or format for ID.
+* `Key identifier` is basically auto-generated numeric ID. You can change it to a custom name if you have a different pattern or format for ID.
 * Add `properties` to your entity. This is similar to adding `column` in the relational database.
 
 # Setup Indexing Guide
@@ -23,7 +23,13 @@ However, if there are multiple properties in a query, `composite indexes` are re
 
 # What you will need
 * index.yaml
+```
+This is for defining your application indexes.
+```
 * gcloud SDK
+```
+This is for create and update all of your indexes definitions from `index.yaml`.
+```
 
 # First time Setup
 
