@@ -35,14 +35,99 @@ Your API endpoint will check `access_token` against your `Auth0 API` credentials
 # Integrate Auth0
 
 ## 1. How to Integrate Auth0 with your API endpoint
-TBA
+1. Enable (aka uncomment) `Auth0` Strategy in `index.js` in `plugins` array.
+```
+{
+    // Auth0 Authentication , by default enforce on all routes unless specify otherwise.
+    register: Auth0
+},
+```
+By default, this will enforce all endpoints to be authenticated due to `DEFAULT_AUTH_MODE` config defined in `.env`.
 
-Coming Soon
+`DEFAULT_AUTH_MODE` refers to `MODE` config parameter in `Hapi.js`. Its value could either be `true`, `false`, `required`, `optional`, or `try`.
+
+See https://hapijs.com/tutorials/auth for more details.
+
+
+Optional: If you prefer a certain endpoint to NOT be authenticated, you just need to set `auth` to `false` in the route config.
+For example,
+```
+{
+    method: 'GET',
+    ....
+    config: {
+      auth: false,
+      handler:....
+    }
+
+},
+```
+2. Enable `example` endpoint from `index.js` (for the sake of testing) or you can use any endpoint/route you have.
+
+3. Launch your application `npm start`.
+
+4. Try to make a cURL request to `http://localhost:8000/restricted` without authorization header.
+
+5. You should get `401` response (aka Unauthorized).
+
+6. To make a request with authorization header,
+```
+curl -v -H "Authorization: Bearer YOUR_TOKEN_HERE" -XGET "http://localhost:8000/restricted"
+
+```
+
+If the invalid token being used, you will get `403` response (aka Forbidden).
+
+## General Flow
+Generally, to receive a valid token for `Auth0 API`, user will need to log-in via your `Auth0 Client` with his/her credential.
+
+Once his/her credential has been verified by Auth0 and your application `validateFunc` method in `authentication/auth0.js`,
+
+the user will receive the valid token.
+
+
+## How to Manually Get a Valid Token
+1. Go to Auth0 Dashboard and click `APIS`.
+
+2. Click at your target `API Audience`.
+
+3. Click `Test` tab.
+
+4. Click `Authorize Clients ...`
+
+5. Look at `Sending the token to the API` section for your token.
+
+6. Try making a request with this token to your API and you should get `200` response.
+
 
 ## 2. How to Integrate Auth0 with your Front End
-TBA
+There are many examples of `Auth0 Client` integration at https://github.com/auth0-samples.
 
-Coming Soon
+i.e. - you can fork or clone one of the following repositories:
+* React.js https://github.com/auth0-samples/auth0-react-samples
+* Jquery https://github.com/auth0-samples/auth0-jquery-samples
+* Php https://github.com/auth0-samples/auth0-php-web-app
+
+### Things to keep in mind
+* Your frontend will be mapped to your `Auth0 Client`.
+* Your application will need to specify which `Audience` (aka your `Auth0 API`)'s `access_token` refers to.
+* During the initialization of `Auth0` object in your front end application, you will need to specify `scope`.
+This refers `scopes` you defined in your `Auth0 API`. By default (from Auth0 example), it will ask for `openid profile read:messages`.
+`openid` and `profile` are default by Auth0. You can exclude this if you'd like. `read:messages` can be replaced by `Auth0 API`'s `scopes`.
+* You can think of `scope` as a permission or Authorization for user do things on your api endpoint.
+* If `scope` doesn't match, user will be rejected -- meaning no more or no less.
+* To enable `scope` in your endpoint, you need to add `scope` to your `auth` config object,
+For example
+```
+{
+    method: 'GET',
+    ...
+    config: {
+       auth: {
+         scope: 'openid YOUR_API_SCOPE',
+      },
+}
+```
 
 # NOTE
 * `Audience` refers to `unique identifier` or `Identifier` for the API. You will need to define `AUTH0_AUDIENCE` in `.env` with this value.
