@@ -60,6 +60,7 @@ var plugins = [
     },
     /**
     {
+        // JWT Auth strategy
         register: JWTAuth,
         options: {
           privateKey: process.env.SECRET_JWT_AUTH_KEY,
@@ -67,11 +68,15 @@ var plugins = [
         }
     },
     **/
+    /**
     {
         // Auth0 Authentication , by default enforce on all routes unless specify otherwise.
         register: Auth0
     },
+    **/
     {
+        // ContentRoute integrated with GoogleDataStore as a database.
+        // http://localhost:8000/content
         register: ContentRoute,
         options: {
             adapter: new GoogleDataStore(
@@ -133,7 +138,12 @@ server.register(plugins, function (err) {
                     }
 
                 },
+                /////////////////////////////////////////////////////////////
+                // This is the example endpoint with Authentication
+                // - You will need uncomment out one of Authentication strategies in order to enable one of these endpoints.
+                ////////////////////////////////////////////////////////////
                 // Example of restricted endpoint using JWT authentication
+                /**
                 {
                     method: 'GET',
                     path: '/restricted',
@@ -145,7 +155,9 @@ server.register(plugins, function (err) {
                         }
                     }
                 },
-                // Example of restricted endpoint with Auth0 Authentication and Auth0's Scope
+                **/
+                // Example of restricted endpoint with Auth0 Authentication integrated with Auth0's Scope
+                /**
                 {
                     method: 'GET',
                     path: '/privatescope',
@@ -160,6 +172,7 @@ server.register(plugins, function (err) {
                         }
                     }
                 }
+                **/
               ]
             );
 
