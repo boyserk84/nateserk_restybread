@@ -113,10 +113,10 @@ i.e. - you can fork or clone one of the following repositories:
 * Your application will need to specify which `Audience` (aka your `Auth0 API`)'s `access_token` refers to.
 * During the initialization of `Auth0` object in your front end application, you will need to specify `scope`.
 This refers `scopes` you defined in your `Auth0 API`. By default (from Auth0 example), it will ask for `openid profile read:messages`.
-`openid` and `profile` are default by Auth0. You can exclude this if you'd like. `read:messages` can be replaced by `Auth0 API`'s `scopes`.
+`openid` and `profile` are default by Auth0. You can exclude them if you'd like. `read:messages` can be replaced by your own `Auth0 API`'s `scopes`.
 * You can think of `scope` as a permission or Authorization for user do things on your api endpoint.
 * If `scope` doesn't match, user will be rejected -- meaning no more or no less.
-* To enable `scope` in your endpoint, you need to add `scope` to your `auth` config object,
+* To enable `scope` verification in your endpoint, you need to add `scope` to your `auth` config object,
 For example
 ```
 {
