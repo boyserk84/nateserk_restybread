@@ -64,13 +64,15 @@ For example,
 ```
 2. Enable `example` endpoint from `index.js` (for the sake of testing) or you can use any endpoint/route you have.
 
-3. Launch your application `npm start`.
+3. Update `AUTH0_DOMAIN` and `AUTH0_AUDIENCE` in `config/.env` with your `Auth0 Client` and `Auth0 API`.
 
-4. Try to make a cURL request to `http://localhost:8000/restricted` without authorization header.
+4. Launch your application `npm start`.
 
-5. You should get `401` response (aka Unauthorized).
+5. Try to make a cURL request to `http://localhost:8000/restricted` without authorization header.
 
-6. To make a request with authorization header,
+6. You should get `401` response (aka Unauthorized).
+
+7. To make a request with authorization header,
 ```
 curl -v -H "Authorization: Bearer YOUR_TOKEN_HERE" -XGET "http://localhost:8000/restricted"
 
