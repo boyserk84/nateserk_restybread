@@ -83,9 +83,10 @@ If the invalid token being used, you will get `403` response (aka Forbidden).
 ## General Flow
 Generally, to receive a valid token for `Auth0 API`, user will need to log-in via your `Auth0 Client` with his/her credential.
 
-Once his/her credential has been verified by Auth0 and your application `validateFunc` method in `authentication/auth0.js`,
+The user will `access_token`, which will be used for authentication when making a request to your application endpoint (aka API).
 
-the user will receive the valid token.
+Once the user make a request to your application endpoint, your application `validateFunc` method in `authentication/auth0.js` will validate a decoded version of `access_token` with your application-specific logic (i.e. revoked token, etc). If successfully pass, the user will have an access to your application endpoint.
+Otherwise, the user will be rejected.
 
 
 ## How to Manually Get a Valid Token
